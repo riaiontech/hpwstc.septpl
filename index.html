@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Workstations & Thin Clients | IONTECH</title>
+<meta name="description" content="Professional workstations and thin clients. Browse products, specifications and current pricing.">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="./index.html" aria-label="Home">
+      <div class="logo-box">
+        <img id="companyLogo" src="./assets/logo-placeholder.svg" alt="Company logo">
+      </div>
+      <div class="brand-copy">
+        <strong id="brandName">IONTECH</strong>
+        <span id="brandTagline">Professional Computing Solutions</span>
+      </div>
+    </a>
+
+    <div class="header-tools">
+      <label class="search-box">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+        <input id="searchInput" type="search" placeholder="Search SKU, model or product" autocomplete="off">
+      </label>
+      <a class="admin-link" href="./admin.html">Admin</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow" id="heroEyebrow">PROFESSIONAL COMPUTING</span>
+        <h1 id="heroHeading">Professional Workstations &amp; Thin Clients</h1>
+        <p id="heroSubheading">High-performance computing solutions designed for professional workloads.</p>
+        <a class="primary-button" href="#catalog">Explore Products</a>
+      </div>
+      <div class="hero-visual">
+        <img id="heroImage" src="./assets/hero-workstation.jpg" alt="Professional workstation"
+             onerror="this.closest('.hero-visual').classList.add('no-image')">
+      </div>
+    </div>
+  </section>
+
+  <section class="update-bar">
+    <div class="page-width update-inner">
+      <span class="update-label">PRICELIST</span>
+      <span id="priceListDate">Updated as of September 16, 2026</span>
+    </div>
+  </section>
+
+  <section id="catalog" class="catalog page-width">
+    <div class="catalog-top">
+      <div>
+        <span class="eyebrow">PRODUCT CATALOG</span>
+        <h2 id="catalogHeading">Workstations &amp; Thin Clients</h2>
+        <p id="catalogSubheading">Browse our current product selection.</p>
+      </div>
+      <div class="catalog-total"><b id="productCount">0</b><span>products</span></div>
+    </div>
+
+    <div class="category-tabs" role="tablist" aria-label="Product categories">
+      <button class="category-tab active" data-category="all">
+        <b>All Products</b><span>Complete catalog</span>
+      </button>
+      <button class="category-tab" data-category="Mobile Workstations">
+        <b>Mobile Workstations</b><span>Professional mobile solutions</span>
+      </button>
+      <button class="category-tab" data-category="Desktop Workstations">
+        <b>Desktop Workstations</b><span>Tower &amp; desktop solutions</span>
+      </button>
+      <button class="category-tab" data-category="Thin Clients">
+        <b>Thin Clients</b><span>Secure endpoint computing</span>
+      </button>
+    </div>
+
+    <div id="modelArea" class="model-area hidden">
+      <div class="model-label" id="modelLabel">Models</div>
+      <div id="modelButtons" class="model-tabs"></div>
+    </div>
+
+    <div id="activeFilter" class="active-filter"></div>
+    <div id="productGrid" class="product-grid"></div>
+
+    <div id="emptyState" class="empty-state hidden">
+      <h3>No products found</h3>
+      <p>Try another SKU, model or category.</p>
+    </div>
+  </section>
+</main>
+
+<div id="productModal" class="modal" aria-hidden="true">
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalModel">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="modal-layout">
+      <div class="modal-media">
+        <div class="modal-main-image"><img id="modalImage1" src="" alt=""></div>
+        <div class="thumbs">
+          <button class="thumb active"><img id="modalThumb1" src="" alt=""></button>
+          <button class="thumb"><img id="modalThumb2" src="" alt=""></button>
+        </div>
+      </div>
+      <div class="modal-info">
+        <span id="modalCategory" class="eyebrow"></span>
+        <div id="modalSku" class="modal-sku"></div>
+        <h2 id="modalModel"></h2>
+        <p id="modalDescription" class="modal-description"></p>
+
+        <section id="modalFeaturesSection" class="info-section">
+          <h3>Features</h3>
+          <ul id="modalFeatures"></ul>
+        </section>
+
+        <section class="price-panel">
+          <div><span>ON-HAND</span><strong id="modalOnhandPrice">—</strong></div>
+          <div><span>ORDER BASIS</span><strong id="modalOrderPrice">—</strong></div>
+        </section>
+
+        <section class="info-section">
+          <h3>Specifications</h3>
+          <div id="modalSpecs" class="spec-table"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="page-width footer-inner">
+    <div><b id="footerBrand">IONTECH</b><p id="footerText">Professional Computing Solutions</p></div>
+    <span>Product Catalog</span>
+  </div>
+</footer>
+
+<script src="./products.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

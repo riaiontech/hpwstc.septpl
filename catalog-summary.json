@@ -1,0 +1,11 @@
+{
+  "total_products": 102,
+  "workstation_products": 25,
+  "thin_client_products": 77,
+  "products_with_component_lists": 25,
+  "categories": [
+    "Desktop Workstations",
+    "Mobile Workstations",
+    "Thin Clients"
+  ]
+}

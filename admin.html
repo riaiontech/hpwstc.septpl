@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catalog Admin | IONTECH</title>
+<link rel="stylesheet" href="./styles.css">
+<style>
+.admin-page{max-width:1180px;margin:auto;padding:45px 24px 80px}
+.admin-login,.admin-panel{border:1px solid #d9dde0;background:#fff}
+.admin-login{max-width:440px;margin:70px auto;padding:32px}
+.admin-panel{padding:30px}
+.admin-page h1{font-size:32px;font-weight:400;margin:0 0 8px}
+.admin-page h2{font-size:19px;font-weight:400;margin:35px 0 15px;border-bottom:1px solid #ddd;padding-bottom:10px}
+.admin-note{color:#666;font-size:12px;margin-bottom:20px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.field input,.field textarea,.field select{border:1px solid #cfd4d8;padding:10px;outline:0;background:#fff}
+.field textarea{min-height:90px;resize:vertical}
+.admin-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.admin-button{border:1px solid #222;background:#fff;padding:10px 16px;font-weight:700;font-size:12px}
+.admin-button.primary{background:#0096d6;color:#fff;border-color:#0096d6}
+.admin-button.danger{border-color:#a22;color:#a22}
+.product-admin-list{display:grid;gap:12px}
+.admin-product{border:1px solid #ddd;padding:15px;display:grid;grid-template-columns:110px 1fr auto;gap:15px;align-items:center}
+.admin-product img{width:110px;height:75px;object-fit:contain;background:#f5f6f7}
+.admin-product b{display:block}.admin-product span{font-size:12px;color:#666}
+.hidden-admin{display:none!important}
+.status{padding:10px;background:#f1f8fb;border-left:3px solid #0096d6;font-size:12px;margin-top:15px}
+@media(max-width:700px){.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.admin-product{grid-template-columns:80px 1fr}.admin-product img{width:80px}.admin-product .admin-button{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="./index.html">
+      <div class="logo-box"><img id="adminLogo" src="./assets/logo-placeholder.svg" alt=""></div>
+      <div class="brand-copy"><strong>IONTECH</strong><span>Catalog Administration</span></div>
+    </a>
+    <a class="admin-link" href="./index.html">View Catalog</a>
+  </div>
+</header>
+
+<main class="admin-page">
+
+  <section id="loginBox" class="admin-login">
+    <span class="eyebrow">ADMINISTRATION</span>
+    <h1>Catalog Admin</h1>
+    <p class="admin-note">Sign in to edit the content displayed on this browser.</p>
+    <div class="field">
+      <label>Password</label>
+      <input id="adminPassword" type="password" autocomplete="current-password">
+    </div>
+    <div class="admin-actions">
+      <button class="admin-button primary" id="loginButton">Sign In</button>
+      <a class="admin-button" href="./index.html">Cancel</a>
+    </div>
+    <div id="loginMessage" class="status hidden-admin"></div>
+  </section>
+
+  <section id="adminPanel" class="admin-panel hidden-admin">
+    <div style="display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap">
+      <div><span class="eyebrow">CATALOG ADMINISTRATION</span><h1>Edit Website</h1></div>
+      <button class="admin-button" id="logoutButton">Log Out</button>
+    </div>
+
+    <p class="admin-note">
+      These edits are saved in this browser using local storage. They do not automatically change the public GitHub site for other visitors.
+    </p>
+
+    <h2>Brand &amp; Homepage</h2>
+    <div class="form-grid">
+      <div class="field"><label>Company / Brand Name</label><input id="brandName"></div>
+      <div class="field"><label>Brand Tagline</label><input id="brandTagline"></div>
+      <div class="field"><label>Hero Eyebrow</label><input id="heroEyebrow"></div>
+      <div class="field full"><label>Hero Heading</label><input id="heroHeading"></div>
+      <div class="field full"><label>Hero Subheading</label><textarea id="heroSubheading"></textarea></div>
+      <div class="field full"><label>Pricelist Updated As Of</label><input id="priceListDate"></div>
+      <div class="field"><label>Catalog Heading</label><input id="catalogHeading"></div>
+      <div class="field"><label>Catalog Subheading</label><input id="catalogSubheading"></div>
+      <div class="field full"><label>Company Logo URL or local path</label><input id="logo"></div>
+      <div class="field full"><label>Hero Image URL or local path</label><input id="heroImage"></div>
+    </div>
+
+    <div class="admin-actions">
+      <button class="admin-button primary" id="saveSite">Save Website Settings</button>
+      <button class="admin-button" id="resetSite">Reset Website Settings</button>
+    </div>
+
+    <h2>Product Data</h2>
+    <div class="field">
+      <label>Find Product</label>
+      <input id="productSearch" placeholder="Search SKU or model">
+    </div>
+    <div id="productList" class="product-admin-list" style="margin-top:15px"></div>
+
+    <div id="productEditor" class="hidden-admin">
+      <h2>Edit Product</h2>
+      <div class="form-grid">
+        <div class="field"><label>SKU</label><input id="pSku"></div>
+        <div class="field"><label>Model</label><input id="pModel"></div>
+        <div class="field"><label>Category</label><input id="pCategory"></div>
+        <div class="field full"><label>Description / Subheading</label><textarea id="pDescription"></textarea></div>
+        <div class="field full"><label>Features (one per line)</label><textarea id="pFeatures"></textarea></div>
+        <div class="field full"><label>Specifications (one per line: Name: Value)</label><textarea id="pSpecs"></textarea></div>
+        <div class="field"><label>On-Hand Price</label><input id="pOnhand"></div>
+        <div class="field"><label>Order-Basis Price</label><input id="pOrder"></div>
+        <div class="field"><label>Image 1</label><input id="pImage1"></div>
+        <div class="field"><label>Image 2</label><input id="pImage2"></div>
+        <div class="field full"><label>General SEO Title</label><input id="pSeoTitle"></div>
+        <div class="field full"><label>General SEO Description</label><textarea id="pSeoDescription"></textarea></div>
+        <div class="field"><label>On-Hand SEO Title</label><input id="pSeoOnTitle"></div>
+        <div class="field"><label>Order-Basis SEO Title</label><input id="pSeoOrderTitle"></div>
+        <div class="field"><label>On-Hand SEO Description</label><textarea id="pSeoOnDescription"></textarea></div>
+        <div class="field"><label>Order-Basis SEO Description</label><textarea id="pSeoOrderDescription"></textarea></div>
+      </div>
+      <div class="admin-actions">
+        <button class="admin-button primary" id="saveProduct">Save Product</button>
+        <button class="admin-button" id="cancelProduct">Cancel</button>
+      </div>
+      <div id="saveMessage" class="status hidden-admin"></div>
+    </div>
+  </section>
+</main>
+
+<script src="./products.js"></script>
+<script src="./admin.js"></script>
+</body>
+</html>
